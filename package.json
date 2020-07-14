@@ -1,0 +1,28 @@
+{
+  "name": "node-jwt",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "author": "coco",
+  "private": true,
+  "scripts": {
+    "serve": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts"
+  },
+  "devDependencies": {
+    "@types/app-root-path": "^1.2.4",
+    "@types/bcrypt": "^3.0.0",
+    "@types/dotenv": "^8.2.0",
+    "@types/ioredis": "^4.17.2",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/node": "^14.0.23",
+    "nodemon": "^2.0.4",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.6"
+  },
+  "dependencies": {
+    "app-root-path": "^3.0.0",
+    "bcrypt": "^5.0.0",
+    "dotenv": "^8.2.0",
+    "ioredis": "^4.17.3",
+    "jsonwebtoken": "^8.5.1"
+  }
+}
