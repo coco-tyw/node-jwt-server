@@ -1,7 +1,7 @@
-import {User} from "./user"
-import {Role} from "./role"
+import {User, UserT} from "./user"
+import {Role, RoleT} from "./role"
 
 export {
-  User,
-  Role
+  User, UserT,
+  Role, RoleT
 }
