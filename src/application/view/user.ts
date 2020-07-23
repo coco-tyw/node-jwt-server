@@ -1,25 +1,26 @@
 import * as entity from "@/domain/entity"
+import * as view from "@/application/view"
 
 export type User = {
-  ID: string
-  Name: string
-  Email: string
-  Roles: entity.Role[]
-  CreatedAt: number
-  UpdatedAt: number
+  id: string
+  name: string
+  email: string
+  roles: view.Role[]
+  createdAt: number
+  updatedAt: number
 }
 
 export type Users = {
-  Items: User[]
-  PerPage: number
-  Count: number
-  NextCursor: number
+  items: User[]
+  perPage: number
+  count: number
+  nextCursor: number | null
 }
 
 export type UserSummary = {
-  ID: string
-  Name: string
-  Email: string
-  CreatedAt: number
-  UpdatedAt: number
+  id: string
+  name: string
+  email: string
+  createdAt: number
+  updatedAt: number
 }

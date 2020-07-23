@@ -1,4 +1,4 @@
-export type RoleT = {
+export type RoleType = {
   id: string
   name: string
   createdAt: Date
@@ -6,7 +6,7 @@ export type RoleT = {
   deletedAt?: Date
 }
 
-export interface RoleIF extends RoleT {}
+export interface RoleIF extends RoleType {}
 
 export class Role implements RoleIF {
   id: string

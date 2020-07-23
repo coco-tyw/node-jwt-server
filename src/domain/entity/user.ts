@@ -1,4 +1,4 @@
-export type UserT = {
+export type UserType = {
   id: string
   email: string
   name: string
@@ -10,7 +10,7 @@ export type UserT = {
   deletedAt?: Date
 }
 
-export interface UserIF extends UserT {}
+export interface UserIF extends UserType {}
 
 const passwordLengthMin = 8
 const passwordLengthMax = 64

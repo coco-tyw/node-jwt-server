@@ -2,33 +2,22 @@ import * as entity from "@/domain/entity"
 import * as view from "@/application/view"
 
 export class RoleResolver {
-  private users: entity.User[]
-  constructor(users: entity.User[]) {
-    this.users = users
-  }
-
-  resolve(role: entity.Role): view.Role {
-    const users = this.users.filter(user => user.RoleIDs.includes(role.ID))
-    users.forEach(user => {
-      delete user.PasswordHash
-      delete user.RoleIDs
-      delete user.DeletedAt
-    })
+  resolve(role: entity.RoleType, users: view.UserSummary[] = []): view.Role {
     return {
-      ID: role.ID,
-      Name: role.Name,
-      Users: users,
-      CreatedAt: role.CreatedAt,
-      UpdatedAt: role.UpdatedAt
+      id: role.id,
+      name: role.name,
+      users: users,
+      createdAt: role.createdAt.getTime(),
+      updatedAt: role.updatedAt.getTime()
     }
   }
-  resolveCollection(roles: entity.Role[], perPage: number, cursor: number): view.Roles {
-    const res = roles.map(this.resolve)
+  resolveCollection(roles: entity.RoleType[], perPage: number, cursor: number | null): view.Roles {
+    const res = roles.map(role => this.resolve(role))
     return {
-      Items: res,
-      Count: res.length,
-      NextCursor: cursor,
-      PerPage: perPage
+      items: res,
+      count: res.length,
+      nextCursor: cursor,
+      perPage: perPage
     }
   }
 }

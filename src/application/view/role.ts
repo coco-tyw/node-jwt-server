@@ -2,16 +2,16 @@ import * as entity from "@/domain/entity"
 import * as view from "@/application/view"
 
 export type Role = {
-  ID: string
-  Name: string
-  Users: view.UserSummary[]
-  CreatedAt: number
-  UpdatedAt: number
+  id: string
+  name: string
+  users: view.UserSummary[]
+  createdAt: number
+  updatedAt: number
 }
 
 export type Roles = {
-  Items: Role[]
-  PerPage: number
-  Count: number
-  NextCursor: number
+  items: Role[]
+  perPage: number
+  count: number
+  nextCursor: number | null
 }
