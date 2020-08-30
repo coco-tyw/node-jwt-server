@@ -4,9 +4,14 @@ import * as AppRootPath from "app-root-path"
 
 Dotenv.config({path: AppRootPath.resolve('/.env.local')})
 
+if (!process.env.REDIS_HOST || !process.env.REDIS_PORT) {
+  console.error("set env file!!")
+  process.exit(0)
+}
+
 const options = {
-  ...(() => process.env.REDIS_PORT ? {port: process.env.REDIS_PORT} : {} )(),
-  ...(() => process.env.REDIS_HOST ? {host: process.env.REDIS_HOST} : {} )(),
+  port: Number(process.env.REDIS_PORT),
+  host: process.env.REDIS_HOST,
   lazyConnect: true
 } as Redis.RedisOptions
 
