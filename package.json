@@ -1,6 +1,6 @@
 {
   "name": "node-jwt",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "src/index.ts",
   "author": "coco",
   "private": true,
@@ -20,11 +20,13 @@
   },
   "dependencies": {
     "@types/express": "^4.17.7",
+    "@types/morgan": "^1.9.1",
     "app-root-path": "^3.0.0",
     "bcrypt": "^5.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "ioredis": "^4.17.3",
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0"
   }
 }

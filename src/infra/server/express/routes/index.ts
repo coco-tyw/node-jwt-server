@@ -1,5 +1,6 @@
 import {Express, Router} from 'express'
-import { Controllers } from '../..'
+import morgan from 'morgan'
+import {Controllers} from '../..'
 
 export default class ExpressRouter {
   private app: Express
@@ -14,5 +15,6 @@ export default class ExpressRouter {
       res.send('hello jwt!')
     })
     this.app.use(router)
+    this.app.use(morgan('combined'))
   }
 }
