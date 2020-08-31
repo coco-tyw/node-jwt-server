@@ -19,4 +19,7 @@ const redis = new Redis(options)
 
 redis.connect().then(async () => {
   console.log(await redis.get("key"))
+}).catch(() => {
+  console.error("can not connect to database server")
+process.exit(0)
 })
