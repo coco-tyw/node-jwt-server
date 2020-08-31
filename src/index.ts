@@ -1,25 +1,12 @@
-import Redis from "ioredis"
 import * as Dotenv from "dotenv"
 import * as AppRootPath from "app-root-path"
+import ExpressServer from './infra/server/express'
 
 Dotenv.config({path: AppRootPath.resolve('/.env.local')})
 
-if (!process.env.REDIS_HOST || !process.env.REDIS_PORT) {
-  console.error("set env file!!")
-  process.exit(0)
-}
+const {SERVER_PORT} = process.env
 
-const options = {
-  port: Number(process.env.REDIS_PORT),
-  host: process.env.REDIS_HOST,
-  lazyConnect: true
-} as Redis.RedisOptions
+const app = new ExpressServer(Number(SERVER_PORT), {user: {}})
+app.run()
 
-const redis = new Redis(options)
 
-redis.connect().then(async () => {
-  console.log(await redis.get("key"))
-}).catch(() => {
-  console.error("can not connect to database server")
-process.exit(0)
-})
