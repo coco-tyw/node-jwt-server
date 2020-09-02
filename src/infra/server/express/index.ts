@@ -1,14 +1,14 @@
 import express from 'express'
-import {Server, Controllers} from '..'
-import Router from './routes'
+import {Server} from '..'
+import router from './handler/router'
 
-export default class ExpressServer implements Server {
+export default class implements Server {
   private app = express()
   private port: number
 
-  constructor(port = 3000, controllers: Controllers) {
+  constructor(port = 3000) {
     this.port = port
-    new Router(this.app).init(controllers)
+    router(this.app)
   }
 
   async run() {

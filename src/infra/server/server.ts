@@ -1,10 +1,6 @@
 import UserController from "./user";
 
 export default class Server {
-  constructor(port: number, controllers: Controllers) {}
+  constructor(port: number) {}
   async run() {}
-}
-
-export interface Controllers {
-  user: UserController
 }

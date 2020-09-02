@@ -1,6 +1,5 @@
-import Server, {Controllers} from './server'
+import Server from './server'
 
 export {
-  Server,
-  Controllers
+  Server
 }
