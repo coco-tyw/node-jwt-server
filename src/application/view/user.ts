@@ -1,5 +1,5 @@
-import * as entity from "@/domain/entity"
-import * as view from "@/application/view"
+import * as entity from "@/domain/entity/index"
+import * as view from "@/application/view/index"
 
 export type User = {
   id: string

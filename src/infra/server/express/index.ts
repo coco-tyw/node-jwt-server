@@ -1,5 +1,5 @@
 import express from 'express'
-import {Server} from '..'
+import {Server} from '../index'
 import router from './handler/router'
 
 export default class implements Server {

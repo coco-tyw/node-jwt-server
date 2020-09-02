@@ -1,6 +1,6 @@
 import * as domain from '@/domain/repository'
-import * as presenter from '../presenter'
-import * as view from '../view'
+import * as presenter from '../presenter/index'
+import * as view from '../view/index'
 
 interface RoleIF {
   roleRepository: domain.RoleRepository
@@ -17,18 +17,18 @@ export class Role implements RoleIF {
     this.roleRepository = roleRepository
     this.userRepository = userRepository
   }
-  getAll() {
-    const roles = this.roleRepository.FindAll()
+  async getAll() {
+    const roles = await this.roleRepository.findAll()
     const res = new presenter.RoleResolver().resolveCollection(roles, 100, null)
     return res
   }
-  get(id: string) {
-    const roles = this.roleRepository.FindAll()
+  async get(id: string) {
+    const roles = await this.roleRepository.findAll()
     const role = roles.find(role => role.id === id)
     if (!role) {
       throw new Error(`role(id: ${id}) is not found`)
     }
-    let users = this.userRepository.FindAll()
+    let users = await this.userRepository.findAll()
     users = users.filter(user => user.roleIds.includes(role.id))
     const userSummarys: view.UserSummary[] = users.map(user => {
       return {

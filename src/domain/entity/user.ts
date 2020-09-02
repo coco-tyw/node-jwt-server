@@ -1,21 +1,7 @@
-export type UserType = {
-  id: string
-  email: string
-  name: string
-  passwordHash: string
-  roleIds: string[]
-  disabled: boolean
-  createdAt: Date
-  updatedAt: Date
-  deletedAt?: Date
-}
-
-export interface UserIF extends UserType {}
-
 const passwordLengthMin = 8
 const passwordLengthMax = 64
 
-export class User implements UserIF {
+export class User {
   id: string
   email: string
   name: string
