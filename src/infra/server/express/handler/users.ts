@@ -1,17 +1,25 @@
 import {Router} from 'express'
-import {UserRepository} from '@/infra/store/memory/index'
-import {UserCommand} from '@/application/command/index'
+import {UserRepository, RoleRepository} from '@/infra/store/memory/index'
+import {CreateUserCommand} from '@/application/command/index'
+import {UserService} from '@/application/service/index'
 
 const router = Router()
-const userCommand = new UserCommand(new UserRepository)
+const userService = new UserService(new UserRepository(), new RoleRepository())
 
 router.post('/', (req, res, next) => {
+  const createUsreCommand = new CreateUserCommand('email', 'name', 'password', ['roleId'])
+  try {
+    createUsreCommand.validate()
+  } catch (error) {
+    res.send(error.message)
+  }
   res.send('create user')
 })
+
 router.get('/', async (req, res, next) => {
   try {
-    await userCommand.createUser('email', 'name', 'password', 'password', ['roleId'])
-    res.send('get users')
+    const users = await userService.getUsers()
+    res.json(users)
   } catch (error) {
     res.send(error.message)
   }

@@ -1,7 +1,8 @@
-import UserCommand from './user'
+import {CreateUserCommand, UpdateUserCommand} from './user'
 import RoleCommand from './role'
 
 export {
-  UserCommand,
+  CreateUserCommand,
+  UpdateUserCommand,
   RoleCommand
 }

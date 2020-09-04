@@ -1,51 +1,78 @@
-import {UserRepository} from '@/domain/types/repository'
-
 import Joi from 'joi'
 
-const createUserSchema = Joi.object({
+const userSchema = Joi.object({
   email: Joi.string()
       .email()
       .required(),
   name: Joi.string().alphanum().min(3).max(30)
       .required(),
   password: Joi.string(),
-  repeat_password: Joi.ref('password'),
   roleIds: Joi.array().items(Joi.string().alphanum())
 })
 
-export default class UserCommand {
+export class CreateUserCommand {
 
-  readonly userRepository: UserRepository
-  
-  constructor(userRepo: UserRepository) {
-    this.userRepository = userRepo
-  }
+  email: string
+  name: string
+  password: string
+  roleIDs: string[]
 
-  async createUser(
+  constructor(
     email: string, 
     name: string, 
-    password: string,
-    repeat_password: string,
-    roleIDs: string[]
-  ) {
-    const value: any = await createUserSchema.validate({email, name, password, repeat_password, roleIDs})
-    if (value.error) throw new Error(value.error.details[0].message)
-  }
-
-  readUser(id: string) {
-
-  }
-
-  updateUser(
-    id: string, 
-    email: string, 
     password: string, 
     roleIDs: string[]
   ) {
-
+    this.email = email
+    this.name = name
+    this.password = password
+    this.roleIDs = roleIDs
   }
 
-  deleteUser(id: string) {
+  async validate() {
+    const data = {
+      email: this.email,
+      name: this.name,
+      password: this.password,
+      roleIDs: this.roleIDs
+    }
+    const { error } = userSchema.validate(data)
+    if (error) throw new Error(error.details[0].message)
+    return
+  }
+}
 
+export class UpdateUserCommand {
+
+  id: string
+  email: string
+  name: string
+  password: string
+  roleIDs: string[]
+
+  constructor(
+    id: string,
+    email: string,
+    name: string,
+    password: string,
+    roleIDs: string[]
+  ) {
+    this.id = id
+    this.email = email
+    this.name = name
+    this.password = password
+    this.roleIDs = roleIDs
+  }
+
+  async validate() {
+    const data = {
+      email: this.email,
+      name: this.name,
+      password: this.password,
+      roleIDs: this.roleIDs
+    }
+    const { error } = userSchema.validate(data)
+    if (error) throw new Error(error.details[0].message)
+    return
   }
 }

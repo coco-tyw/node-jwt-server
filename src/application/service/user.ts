@@ -3,7 +3,7 @@ import {UserRepository, RoleRepository} from '@/domain/types/repository'
 import {RoleView, UsersView, UserView} from '@/application/types/view'
 import {UserPresenter, RolePresenter} from '@/application/presenter/index'
 
-export class UserService {
+export default class UserService {
   readonly userRepository: UserRepository
   readonly roleRepository: RoleRepository
   
