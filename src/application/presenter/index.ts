@@ -1,7 +1,7 @@
-import {RoleResolver} from './role'
-import {UserResolver} from './user'
+import UserPresenter from './user'
+import RolePresenter from './role'
 
 export {
-  RoleResolver,
-  UserResolver
+  UserPresenter,
+  RolePresenter
 }

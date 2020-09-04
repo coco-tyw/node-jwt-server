@@ -1,5 +1,7 @@
-import User from './user'
+import UserCommand from './user'
+import RoleCommand from './role'
 
 export {
-  User
+  UserCommand,
+  RoleCommand
 }

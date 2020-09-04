@@ -1,8 +1,8 @@
-import * as entity from "@/domain/entity/index"
-import * as view from "@/application/view/index"
+import {Role} from "@/domain/entity/index"
+import {UserSummaryView, RoleView, RolesView} from "@/application/types/view"
 
-export class RoleResolver {
-  resolve(role: entity.Role, users: view.UserSummary[] = []): view.Role {
+export default class RolePresenter {
+  resolve(role: Role, users: UserSummaryView[] = []): RoleView {
     return {
       id: role.id,
       name: role.name,
@@ -11,7 +11,7 @@ export class RoleResolver {
       updatedAt: role.updatedAt.getTime()
     }
   }
-  resolveCollection(roles: entity.Role[], perPage: number, cursor: number | null): view.Roles {
+  resolveCollection(roles: Role[], perPage: number, cursor: number | null): RolesView {
     const res = roles.map(role => this.resolve(role))
     return {
       items: res,

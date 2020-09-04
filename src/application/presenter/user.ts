@@ -1,14 +1,14 @@
-import * as entity from "@/domain/entity/index"
-import * as view from "@/application/view/index"
+import {User} from "@/domain/entity/index"
+import {RoleView, UserView, UsersView} from "@/application/types/view"
 
-export class UserResolver {
-  private roles: view.Role[]
+export default class UserPresenter {
+  private roles: RoleView[]
 
-  constructor(roles: view.Role[]) {
+  constructor(roles: RoleView[]) {
     this.roles = roles
   }
 
-  resolve(user: entity.User): view.User {
+  resolve(user: User): UserView {
     const roles = this.roles.filter(role => user.roleIds.includes(role.id))
     return {
       id: user.id,
@@ -19,7 +19,7 @@ export class UserResolver {
       updatedAt: user.updatedAt.getTime()
     }
   }
-  resolveCollection(users: entity.User[], perPage: number, cursor: number | null): view.Users {
+  resolveCollection(users: User[], perPage: number, cursor: number | null): UsersView {
     const res = users.map(this.resolve)
     return {
       items: res,

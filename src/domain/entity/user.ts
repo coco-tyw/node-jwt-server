@@ -1,7 +1,7 @@
 const passwordLengthMin = 8
 const passwordLengthMax = 64
 
-export class User {
+export default class User {
   id: string
   email: string
   name: string

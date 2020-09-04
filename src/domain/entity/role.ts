@@ -1,4 +1,4 @@
-export class Role {
+export default class Role {
   id: string
   name: string
   createdAt: Date

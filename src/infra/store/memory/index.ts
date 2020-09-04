@@ -1,5 +1,5 @@
-import User from './user'
+import UserRepository from './user'
 
 export {
-  User
+  UserRepository
 }

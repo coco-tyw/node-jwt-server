@@ -1,5 +1,5 @@
-import {UserRepository} from '@/domain/repository'
-import * as Entity from '@/domain/entity/index'
+import {UserRepository} from '@/domain/types/repository'
+
 import Joi from 'joi'
 
 const createUserSchema = Joi.object({
@@ -13,7 +13,7 @@ const createUserSchema = Joi.object({
   roleIds: Joi.array().items(Joi.string().alphanum())
 })
 
-export default class User {
+export default class UserCommand {
 
   readonly userRepository: UserRepository
   

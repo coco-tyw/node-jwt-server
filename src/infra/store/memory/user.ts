@@ -1,11 +1,11 @@
-import {UserRepository} from '@/domain/repository'
-import {User as UserEntity} from '@/domain/entity/index'
+import {UserRepository as UserRepo} from '@/domain/types/repository'
+import {User} from '@/domain/entity/index'
 
-export default class User implements UserRepository {
+export default class UserRepository implements UserRepo {
 
-  private users: UserEntity[] = []
+  private users: User[] = []
 
-  async create(user: UserEntity) {
+  async create(user: User) {
     const exist = this.users.find(u => u.id === user.id)
     if (exist) throw new Error('already exists')
     this.users.push(user)
@@ -28,7 +28,7 @@ export default class User implements UserRepository {
     return user
   }
 
-  async update(user: UserEntity) {
+  async update(user: User) {
     const index = this.users.findIndex(u => u.id === user.id)
     if (!index) throw new Error('resouce not found')
     this.users.splice(index, 1, user)

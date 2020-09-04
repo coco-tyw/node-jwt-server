@@ -1,6 +1,6 @@
 import {Router} from 'express'
-import {User as UserRepository} from '@/infra/store/memory/index'
-import {User as UserCommand} from '@/application/command/index'
+import {UserRepository} from '@/infra/store/memory/index'
+import {UserCommand} from '@/application/command/index'
 
 const router = Router()
 const userCommand = new UserCommand(new UserRepository)

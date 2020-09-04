@@ -1,25 +1,20 @@
-import * as domain from '@/domain/repository'
-import * as presenter from '../presenter/index'
-import * as view from '../view/index'
+import {RoleRepository, UserRepository} from '@/domain/types/repository'
+import {RolePresenter} from '@/application/presenter/index'
+import {UserSummaryView} from '@/application/types/view'
 
-interface RoleIF {
-  roleRepository: domain.RoleRepository
-  userRepository: domain.UserRepository
-}
-
-export class Role implements RoleIF {
-  roleRepository: domain.RoleRepository
-  userRepository: domain.UserRepository
+export default class RoleService {
+  roleRepository: RoleRepository
+  userRepository: UserRepository
   constructor(
-    roleRepository: domain.RoleRepository,
-    userRepository: domain.UserRepository
+    roleRepository: RoleRepository,
+    userRepository: UserRepository
   ) {
     this.roleRepository = roleRepository
     this.userRepository = userRepository
   }
   async getAll() {
     const roles = await this.roleRepository.findAll()
-    const res = new presenter.RoleResolver().resolveCollection(roles, 100, null)
+    const res = new RolePresenter().resolveCollection(roles, 100, null)
     return res
   }
   async get(id: string) {
@@ -30,7 +25,7 @@ export class Role implements RoleIF {
     }
     let users = await this.userRepository.findAll()
     users = users.filter(user => user.roleIds.includes(role.id))
-    const userSummarys: view.UserSummary[] = users.map(user => {
+    const userSummarys: UserSummaryView[] = users.map(user => {
       return {
         id: user.id,
         name: user.name,
@@ -39,7 +34,7 @@ export class Role implements RoleIF {
         updatedAt: user.updatedAt.getTime()
       }
     })
-    const res = new presenter.RoleResolver().resolve(role, userSummarys)
+    const res = new RolePresenter().resolve(role, userSummarys)
     return res
   }
   create() {
