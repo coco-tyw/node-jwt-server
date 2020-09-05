@@ -6,7 +6,7 @@ export default class User {
   email: string
   name: string
   passwordHash: string
-  roleIds: string[]
+  roleIDs: string[]
   disabled: boolean = false
   createdAt: Date
   updatedAt: Date
@@ -22,11 +22,11 @@ export default class User {
     if (password.length < passwordLengthMin || password.length > passwordLengthMax) {
       throw new Error('invalid password length')
     }
-    this.id = at.toString()
+    this.id = `${at.getTime()}`
     this.email = email
     this.name = name
     this.passwordHash = password
-    this.roleIds = roleIDs
+    this.roleIDs = roleIDs
     this.createdAt = at
     this.updatedAt = at
   }
@@ -35,7 +35,7 @@ export default class User {
     at: Date,
     roleIds: string[]
   ) {
-    this.roleIds = roleIds
+    this.roleIDs = roleIds
     this.updatedAt = at
   }
 

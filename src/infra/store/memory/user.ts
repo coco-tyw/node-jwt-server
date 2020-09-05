@@ -13,7 +13,7 @@ export default class UserRepository implements UserRepo {
   }
 
   async findAll() {
-    return Promise.resolve(this.users)
+    return this.users
   }
 
   async findById(id: string) {

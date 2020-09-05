@@ -9,7 +9,7 @@ export default class UserPresenter {
   }
 
   resolve(user: User): UserView {
-    const roles = this.roles.filter(role => user.roleIds.includes(role.id))
+    const roles = this.roles.filter(role => user.roleIDs.includes(role.id))
     return {
       id: user.id,
       name: user.name,
@@ -20,7 +20,7 @@ export default class UserPresenter {
     }
   }
   resolveCollection(users: User[], perPage: number, cursor: number | null): UsersView {
-    const res = users.map(this.resolve)
+    const res = users.map(user => this.resolve(user))
     return {
       items: res,
       count: res.length,

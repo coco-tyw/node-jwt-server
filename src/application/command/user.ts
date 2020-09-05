@@ -7,7 +7,7 @@ const userSchema = Joi.object({
   name: Joi.string().alphanum().min(3).max(30)
       .required(),
   password: Joi.string(),
-  roleIds: Joi.array().items(Joi.string().alphanum())
+  roleIDs: Joi.array().items(Joi.string().alphanum())
 })
 
 export class CreateUserCommand {

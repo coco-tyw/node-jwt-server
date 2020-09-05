@@ -6,14 +6,25 @@ import {UserService} from '@/application/service/index'
 const router = Router()
 const userService = new UserService(new UserRepository(), new RoleRepository())
 
-router.post('/', (req, res, next) => {
-  const createUsreCommand = new CreateUserCommand('email', 'name', 'password', ['roleId'])
+router.post('/', async (req, res, next) => {
+  const com = new CreateUserCommand(
+    'sample@example.com', 
+    'sample', 
+    'password', 
+    []
+  )
   try {
-    createUsreCommand.validate()
+    await com.validate()
+    const user = await userService.createUser(
+      com.email, 
+      com.password, 
+      com.name, 
+      com.roleIDs
+    )
+    res.json(user)
   } catch (error) {
     res.send(error.message)
   }
-  res.send('create user')
 })
 
 router.get('/', async (req, res, next) => {
@@ -23,8 +34,6 @@ router.get('/', async (req, res, next) => {
   } catch (error) {
     res.send(error.message)
   }
-  
-  
 })
 router.get('/:id', (req, res, next) => {
   res.send('get user')
