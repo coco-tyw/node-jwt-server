@@ -41,8 +41,13 @@ router.get('/:id', (req, res, next) => {
 router.put('/:id', (req, res, next) => {
   res.send('update user')
 })
-router.delete('/:id', (req, res, next) => {
-  res.send('delete user')
+router.delete('/:id', async (req, res, next) => {
+  try {
+    await userService.deleteUser(req.params.id)
+    res.send('delete user')
+  } catch(error) {
+    res.send('failed to delete user')
+  }
 })
 
 export default router

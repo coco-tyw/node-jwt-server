@@ -68,7 +68,7 @@ export default class UserService {
 
   }
 
-  DeleteUser() {
-
+  async deleteUser(id: string) {
+    await this.userRepository.delete(id)
   }
 }
