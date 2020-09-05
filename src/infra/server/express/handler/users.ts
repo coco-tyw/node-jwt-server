@@ -19,7 +19,7 @@ router.post('/', async (req, res, next) => {
       com.email, 
       com.password, 
       com.name, 
-      com.roleIDs
+      com.roleIDs 
     )
     res.json(user)
   } catch (error) {
@@ -35,8 +35,13 @@ router.get('/', async (req, res, next) => {
     res.send(error.message)
   }
 })
-router.get('/:id', (req, res, next) => {
-  res.send('get user')
+router.get('/:id', async (req, res, next) => {
+  try {
+    const user = await userService.getUser(req.params.id)
+    res.json(user)
+  } catch (error) {
+    res.send(error.message)
+  }
 })
 router.put('/:id', (req, res, next) => {
   res.send('update user')
