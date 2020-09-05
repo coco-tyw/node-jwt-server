@@ -33,7 +33,12 @@ export default class UserService {
     return presenter
   }
 
-  async createUser(email: string, password: string, name: string, roleIDs: string[]): Promise<UserView> {
+  async createUser(
+    email: string, 
+    password: string, 
+    name: string, 
+    roleIDs: string[]
+  ): Promise<UserView> {
     const user = new User(new Date(), email, password, name, roleIDs)
     await this.userRepository.create(user)
     const rolePresenter = new RolePresenter()

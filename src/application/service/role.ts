@@ -24,7 +24,7 @@ export default class RoleService {
       throw new Error(`role(id: ${id}) is not found`)
     }
     let users = await this.userRepository.findAll()
-    users = users.filter(user => user.roleIds.includes(role.id))
+    users = users.filter(user => user.roleIDs.includes(role.id))
     const userSummarys: UserSummaryView[] = users.map(user => {
       return {
         id: user.id,
