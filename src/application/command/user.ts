@@ -44,20 +44,17 @@ export class CreateUserCommand {
 
 export class UpdateUserCommand {
 
-  id: string
   email: string
   name: string
   password: string
   roleIDs: string[]
 
   constructor(
-    id: string,
     email: string,
     name: string,
     password: string,
     roleIDs: string[]
   ) {
-    this.id = id
     this.email = email
     this.name = name
     this.password = password

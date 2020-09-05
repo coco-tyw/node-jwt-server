@@ -64,8 +64,19 @@ export default class UserService {
     return res
   }
 
-  UpdateUser() {
-
+  async updateUser(
+    id: string,
+    email: string,
+    password: string,
+    name: string,
+    roleIDs: string[]
+  ) {
+    const user = await this.userRepository.findById(id)
+    user.update(email, password, name, roleIDs)
+    await this.userRepository.update(user)
+    const presenter = await this.userPresenter()
+    const res = presenter.resolve(user)
+    return res
   }
 
   async deleteUser(id: string) {

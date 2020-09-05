@@ -1,6 +1,6 @@
 import {Router} from 'express'
 import {UserRepository, RoleRepository} from '@/infra/store/memory/index'
-import {CreateUserCommand} from '@/application/command/index'
+import {CreateUserCommand, UpdateUserCommand} from '@/application/command/index'
 import {UserService} from '@/application/service/index'
 
 const router = Router()
@@ -43,8 +43,25 @@ router.get('/:id', async (req, res, next) => {
     res.send(error.message)
   }
 })
-router.put('/:id', (req, res, next) => {
-  res.send('update user')
+router.put('/:id', async (req, res, next) => {
+  const com = new UpdateUserCommand(
+    'sample@example.updated.com', 
+    'sample.updated', 
+    'password.updated', 
+    []
+  )
+  try {
+    const user = await userService.updateUser(
+      req.params.id,
+      com.email,
+      com.password,
+      com.name,
+      com.roleIDs
+    )
+    res.json(user)
+  } catch (error) {
+    res.send(error.message)
+  }
 })
 router.delete('/:id', async (req, res, next) => {
   try {

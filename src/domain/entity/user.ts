@@ -31,6 +31,13 @@ export default class User {
     this.updatedAt = at
   }
 
+  update(email: string, password: string, name: string, roleIDs: string[]) {
+    this.email = email
+    this.passwordHash = password
+    this.name = name
+    this.roleIDs = roleIDs
+  }
+
   setRoleIds(
     at: Date,
     roleIds: string[]

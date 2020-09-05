@@ -18,14 +18,14 @@ export default class RoleRepository implements RoleRepo {
 
   async update(role: Role) {
     const index = this.roles.findIndex(u => u.id === role.id)
-    if (!index) throw new Error('resouce not found')
+    if (!index) throw new Error('resource not found')
     this.roles.splice(index, 1, role)
     return
   }
 
   async delete(id: string) {
     const index = this.roles.findIndex(role => role.id === id)
-    if (!index) throw new Error('resouce not found')
+    if (!index) throw new Error('resource not found')
     this.roles.splice(index, 1)
   }
 

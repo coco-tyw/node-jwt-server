@@ -18,7 +18,7 @@ export default class UserRepository implements UserRepo {
 
   async findById(id: string) {
     const user = this.users.find(user => user.id === id)
-    if (!user) throw new Error('resouce not fount');
+    if (!user) throw new Error('resource not fount');
     return user
   }
   
@@ -30,14 +30,14 @@ export default class UserRepository implements UserRepo {
 
   async update(user: User) {
     const index = this.users.findIndex(u => u.id === user.id)
-    if (!index) throw new Error('resouce not found')
+    if (index === -1) throw new Error('resource not found')
     this.users.splice(index, 1, user)
     return
   }
 
   async delete(id: string) {
     const index = this.users.findIndex(user => user.id === id)
-    if (!index) throw new Error('resouce not found')
+    if (!index) throw new Error('resource not found')
     this.users.splice(index, 1)
   }
 
