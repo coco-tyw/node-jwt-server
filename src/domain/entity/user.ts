@@ -1,4 +1,5 @@
 import ErrorBadRequest from './error'
+import bcryptjs from 'bcryptjs'
 
 const passwordLengthMin = 8
 const passwordLengthMax = 64
@@ -27,7 +28,7 @@ export default class User {
     this.id = `${at.getTime()}`
     this.email = email
     this.name = name
-    this.passwordHash = password
+    this.passwordHash = bcryptjs.hashSync(password, 10)
     this.roleIDs = roleIDs
     this.createdAt = at
     this.updatedAt = at
