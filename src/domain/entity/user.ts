@@ -1,3 +1,5 @@
+import ErrorBadRequest from './error'
+
 const passwordLengthMin = 8
 const passwordLengthMax = 64
 
@@ -20,7 +22,7 @@ export default class User {
     roleIDs: string[]
   ) {
     if (password.length < passwordLengthMin || password.length > passwordLengthMax) {
-      throw new Error('invalid password length')
+      throw new ErrorBadRequest(400, 'invalid password length')
     }
     this.id = `${at.getTime()}`
     this.email = email

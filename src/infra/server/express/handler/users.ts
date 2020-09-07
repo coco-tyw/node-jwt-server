@@ -23,7 +23,7 @@ router.post('/', async (req, res, next) => {
     )
     res.json(user)
   } catch (error) {
-    res.send(error.message)
+    next(error)
   }
 })
 
@@ -32,7 +32,7 @@ router.get('/', async (req, res, next) => {
     const users = await userService.getUsers()
     res.json(users)
   } catch (error) {
-    res.send(error.message)
+    next(error)
   }
 })
 router.get('/:id', async (req, res, next) => {
@@ -40,7 +40,7 @@ router.get('/:id', async (req, res, next) => {
     const user = await userService.getUser(req.params.id)
     res.json(user)
   } catch (error) {
-    res.send(error.message)
+    next(error)
   }
 })
 router.put('/:id', async (req, res, next) => {
@@ -60,15 +60,17 @@ router.put('/:id', async (req, res, next) => {
     )
     res.json(user)
   } catch (error) {
-    res.send(error.message)
+    next(error)
   }
 })
 router.delete('/:id', async (req, res, next) => {
   try {
     await userService.deleteUser(req.params.id)
-    res.send('delete user')
+    res.json({
+      code: 204
+    })
   } catch(error) {
-    res.send('failed to delete user')
+    next(error)
   }
 })
 

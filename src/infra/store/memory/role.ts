@@ -1,5 +1,6 @@
 import {RoleRepository as RoleRepo} from '@/domain/types/repository'
 import {Role} from '@/domain/entity/index'
+import {ErrorBadRequest} from '@/domain/entity/index'
 
 export default class RoleRepository implements RoleRepo {
 
@@ -7,7 +8,7 @@ export default class RoleRepository implements RoleRepo {
 
   async create(role: Role) {
     const exist = this.roles.find(u => u.id === role.id)
-    if (exist) throw new Error('already exists')
+    if (exist) throw new ErrorBadRequest(409, 'already exists')
     this.roles.push(role)
     return
   }
@@ -18,14 +19,14 @@ export default class RoleRepository implements RoleRepo {
 
   async update(role: Role) {
     const index = this.roles.findIndex(u => u.id === role.id)
-    if (!index) throw new Error('resource not found')
+    if (!index) throw new ErrorBadRequest(404, 'resource not found')
     this.roles.splice(index, 1, role)
     return
   }
 
   async delete(id: string) {
     const index = this.roles.findIndex(role => role.id === id)
-    if (!index) throw new Error('resource not found')
+    if (!index) throw new ErrorBadRequest(404, 'resource not found')
     this.roles.splice(index, 1)
   }
 

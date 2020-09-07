@@ -1,5 +1,6 @@
 import {UserRepository as UserRepo} from '@/domain/types/repository'
 import {User} from '@/domain/entity/index'
+import {ErrorBadRequest} from '@/domain/entity/index'
 
 export default class UserRepository implements UserRepo {
 
@@ -7,7 +8,7 @@ export default class UserRepository implements UserRepo {
 
   async create(user: User) {
     const exist = this.users.find(u => u.id === user.id)
-    if (exist) throw new Error('already exists')
+    if (exist) throw new ErrorBadRequest(409, 'already exists')
     this.users.push(user)
     return
   }
@@ -18,26 +19,26 @@ export default class UserRepository implements UserRepo {
 
   async findById(id: string) {
     const user = this.users.find(user => user.id === id)
-    if (!user) throw new Error('resource not fount');
+    if (!user) throw new ErrorBadRequest(404, 'resource not found')
     return user
   }
   
   async findByEmail(email: string) {
     const user = this.users.find(user => user.email === email)
-    if (!user) throw new Error('rosouce not fount')
+    if (!user) throw new ErrorBadRequest(404, 'resource not found')
     return user
   }
 
   async update(user: User) {
     const index = this.users.findIndex(u => u.id === user.id)
-    if (index === -1) throw new Error('resource not found')
+    if (index === -1) throw new ErrorBadRequest(404, 'resource not found')
     this.users.splice(index, 1, user)
     return
   }
 
   async delete(id: string) {
     const index = this.users.findIndex(user => user.id === id)
-    if (!index) throw new Error('resource not found')
+    if (index === -1) throw new ErrorBadRequest(404, 'resource not found')
     this.users.splice(index, 1)
   }
 

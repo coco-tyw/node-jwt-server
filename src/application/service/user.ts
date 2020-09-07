@@ -12,7 +12,7 @@ export default class UserService {
     this.roleRepository = roleRepository
   }
 
-  static GenerateUser(
+  static generateUser(
     at: Date,
     email: string,
     password: string,

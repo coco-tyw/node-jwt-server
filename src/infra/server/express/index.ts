@@ -1,7 +1,24 @@
-import express from 'express'
+import express, {ErrorRequestHandler} from 'express'
 import {Server} from '../index'
+import morgan from 'morgan'
 import router from './handler/router'
 import helmet from 'helmet'
+import {ErrorBadRequest} from '@/domain/entity/index'
+
+const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
+  if (err instanceof ErrorBadRequest) {
+    res.json({
+      code: err.code,
+      message: err.message
+    })
+  } else {
+    console.log(err)
+    res.json({
+      code: 500,
+      message: 'internal server error!!'
+    })
+  }
+}
 
 export default class implements Server {
   private app = express()
@@ -9,10 +26,12 @@ export default class implements Server {
 
   constructor(port = 3000) {
     this.port = port
-    router(this.app)
+    this.app.use(morgan('combined'))
     this.app.use(helmet())
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }));
+    router(this.app)
+    this.app.use(errorHandler)
   }
 
   async run() {
