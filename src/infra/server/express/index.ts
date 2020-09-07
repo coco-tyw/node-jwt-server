@@ -1,8 +1,8 @@
 import express, {ErrorRequestHandler} from 'express'
 import {Server} from '../index'
-import morgan from 'morgan'
 import router from './handler/router'
 import helmet from 'helmet'
+import morgan from 'morgan'
 import {ErrorBadRequest} from '@/domain/entity/index'
 
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {

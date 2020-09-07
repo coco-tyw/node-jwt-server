@@ -1,8 +1,8 @@
 import {User, Role} from '../entity/index'
 
 export interface UserRepository {
-  findByEmail(email: string): Promise<User>
-  findById(id: string): Promise<User>
+  findByEmail(email: string): Promise<User | undefined>
+  findById(id: string): Promise<User | undefined>
   findAll(): Promise<User[]>
   create(user: User): Promise<void>
   update(user: User): Promise<void>
