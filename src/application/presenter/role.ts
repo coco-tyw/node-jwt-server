@@ -1,8 +1,8 @@
 import {Role} from "@/domain/entity/index"
-import {UserSummaryView, RoleView, RolesView} from "@/application/types/view"
+import {RoleView, RolesView, UserView} from "@/application/types/view"
 
 export default class RolePresenter {
-  resolve(role: Role, users: UserSummaryView[] = []): RoleView {
+  resolve(role: Role, users: UserView[] = []): RoleView {
     return {
       id: role.id,
       name: role.name,

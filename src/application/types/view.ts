@@ -1,5 +1,3 @@
-import {User, Role} from '@/domain/entity/index'
-
 export type UserView = {
   id: string
   name: string
@@ -16,18 +14,10 @@ export type UsersView = {
   nextCursor: number | null
 }
 
-export type UserSummaryView = {
-  id: string
-  name: string
-  email: string
-  createdAt: number
-  updatedAt: number
-}
-
 export type RoleView = {
   id: string
   name: string
-  users: UserSummaryView[]
+  users: UserView[]
   createdAt: number
   updatedAt: number
 }

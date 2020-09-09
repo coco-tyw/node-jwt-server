@@ -38,7 +38,9 @@ export class CreateUserCommand {
       roleIDs: this.roleIDs
     }
     const { error } = userSchema.validate(data)
-    if (error) throw new ErrorBadRequest(400, error.details[0].message)
+    if (error) {
+      throw new ErrorBadRequest(400, error.details[0].message)
+    }
     return
   }
 }
@@ -70,7 +72,9 @@ export class UpdateUserCommand {
       roleIDs: this.roleIDs
     }
     const { error } = userSchema.validate(data)
-    if (error) throw new ErrorBadRequest(400, error.details[0].message)
+    if (error) {
+      throw new ErrorBadRequest(400, error.details[0].message)
+    }
     return
   }
 }
