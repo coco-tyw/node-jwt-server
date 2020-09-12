@@ -17,6 +17,7 @@ export type UsersView = {
 
 export type RoleView = {
   id: string
+  name: string
   users: UserView[]
   createdAt: number
   updatedAt: number
