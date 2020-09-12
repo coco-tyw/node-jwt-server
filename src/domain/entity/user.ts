@@ -1,44 +1,36 @@
 import ErrorBadRequest from './error'
 import bcryptjs from 'bcryptjs'
 
-const passwordLengthMin = 8
-const passwordLengthMax = 64
-
 export default class User {
+
   id: string
-  email: string
-  name: string
-  passwordHash: string
+  systemId: string
+  passwordHash: string // このシステム使う場合はユーザーグループごとに権限ふる時だからさすがにpasswordは必須項目だよねって感じ
   roleIDs: string[]
-  disabled: boolean = false
+  extras: {[s: string]: string} // application固有の付加情報用
   createdAt: Date
   updatedAt: Date
-  deletedAt?: Date
 
   constructor(
     at: Date,
-    email: string,
+    systemId: string,
     password: string,
-    name: string,
-    roleIDs: string[]
+    roleIDs: string[],
+    extras: {[s: string]: string}
   ) {
-    if (password.length < passwordLengthMin || password.length > passwordLengthMax) {
-      throw new ErrorBadRequest(400, 'invalid password length')
-    }
     this.id = `${at.getTime()}`
-    this.email = email
-    this.name = name
+    this.systemId = systemId
     this.passwordHash = bcryptjs.hashSync(password, 10)
     this.roleIDs = roleIDs
+    this.extras = extras
     this.createdAt = at
     this.updatedAt = at
   }
 
-  update(email: string, password: string, name: string, roleIDs: string[]) {
-    this.email = email
+  update(password: string, roleIDs: string[], extras = {}) {
     this.passwordHash = password
-    this.name = name
     this.roleIDs = roleIDs
+    this.extras = extras
   }
 
   setRoleIds(
@@ -47,22 +39,5 @@ export default class User {
   ) {
     this.roleIDs = roleIds
     this.updatedAt = at
-  }
-
-  setDisabled(
-    at: Date,
-    disabled: boolean
-  ) {
-    this.disabled = disabled
-    this.updatedAt = at
-  }
-
-  archive(
-    at: Date
-  ) {
-    this.email = `DELETED@${new Date().toString()}@${this.email}`
-    this.disabled = true
-    this.updatedAt = at
-    this.deletedAt = at
   }
 }

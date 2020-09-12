@@ -19,9 +19,8 @@ export default class UserRepository implements UserRepo {
     return user
   }
   
-  async findByEmail(email: string) {
-    console.log(this.users)
-    const user = this.users.find(user => user.email === email)
+  async findByExtra(key: string, value: string) {
+    const user = this.users.find(user => user.extras[key] === value)
     return user
   }
 

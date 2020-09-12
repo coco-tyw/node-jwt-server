@@ -17,6 +17,11 @@ export default class RoleRepository implements RoleRepo {
     return Promise.resolve(this.roles)
   }
 
+  async findById(id: string) {
+    const role = this.roles.find(role => role.id === id)
+    return Promise.resolve(role)
+  }
+
   async update(role: Role) {
     const index = this.roles.findIndex(u => u.id === role.id)
     if (!index) throw new ErrorBadRequest(404, 'resource not found')

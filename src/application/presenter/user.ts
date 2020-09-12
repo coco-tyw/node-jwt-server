@@ -12,9 +12,8 @@ export default class UserPresenter {
     const roles = this.roles.filter(role => user.roleIDs.includes(role.id))
     return {
       id: user.id,
-      name: user.name,
-      email: user.email,
       roles: roles,
+      extras: user.extras,
       createdAt: user.createdAt.getTime(),
       updatedAt: user.updatedAt.getTime()
     }
