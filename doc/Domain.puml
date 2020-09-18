@@ -1,0 +1,44 @@
+@startuml
+
+  entity "system" {
+    + id [PK]
+    ==
+    name: string
+  }
+  entity "user" {
+    + id [PK]
+    ==
+    # system_id: string [FK(system,id)]
+    password_hash: string
+    # role_ids: string[] [FK(role,id)]
+    extras: {[s: string]: string}
+    created_at: Date
+    updated_at: Date
+  }
+  entity "role" {
+    + id [PK]
+    ==
+    # system_id: string
+    # scope_ids: []string [FK(scope,id)]
+    name: string
+    created_at: Date
+    updated_at: Date
+  }
+  entity "scope" {
+    + id [PK]
+    ==
+    name: string
+  }
+  entity "route" {
+    path: string
+    method: string
+  }
+
+  system --o{ user
+  system --o{ role
+  system --o{ scope
+  user --o{ role
+  role --o{ scope
+  scope --o{ route
+
+@enduml

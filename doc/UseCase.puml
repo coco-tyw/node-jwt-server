@@ -1,0 +1,31 @@
+@startuml
+
+  actor ApplicationClient
+  actor ApplicationServer
+  actor NodeJwtServer
+
+  ApplicationServer -> NodeJwtServer: Create role || Edit role
+  NodeJwtServer -> NodeJwtServer: Process requset
+  NodeJwtServer --> ApplicationServer: status code
+
+  ApplicationClient -> ApplicationServer: Sign up
+  ApplicationServer -> NodeJwtServer: Create user & Attach role
+  NodeJwtServer -> NodeJwtServer: Process request
+  NodeJwtServer --> ApplicationServer: jwt token
+  ApplicationServer --> ApplicationClient: access token
+
+  ApplicationClient -> ApplicationServer: Sigin in
+  ApplicationServer -> NodeJwtServer: Request token
+  NodeJwtServer -> NodeJwtServer: Check user's permission
+  NodeJwtServer -> NodeJwtServer: Create jwt token
+  NodeJwtServer --> ApplicationServer: jwt token
+  ApplicationServer --> ApplicationClient: access token
+  
+  ApplicationClient -> ApplicationServer: Request data
+  ApplicationServer -> NodeJwtServer: Check jwt
+  NodeJwtServer -> NodeJwtServer: Process requset
+  NodeJwtServer --> ApplicationServer: result
+  ApplicationServer -> ApplicationServer: Process server logic
+  ApplicationServer --> ApplicationClient: data
+  
+@enduml
